@@ -18,7 +18,23 @@ reg= linear_model.LinearRegression()
 reg.fit(df[['sepal length','sepal width','petal length','petal width']],df.y)
 
 w= reg.coef_
-print(w)
+x=df[['sepal length','sepal width','petal length','petal width']]
+
+
+df_t =df.pop('Class')
+df_t =df.pop('y')
+matttt=df.to_numpy()
+num_rows, num_cols = matttt.shape
+predicted=[]
+pre=[]
+for i in range(0,num_rows):
+    predicted.append(reg.predict([matttt[i,:]]))
+    pre.append(predicted[i][0])
+
+
+
+ex_df = pd.DataFrame({ 'Y without enc' :pre})
+ex_df.to_excel('my_file.xlsx')
 
 #df=pd.read_csv("insurance.csv")
 #reg= linear_model.LinearRegression()
